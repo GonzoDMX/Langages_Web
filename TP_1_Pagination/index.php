@@ -1,115 +1,158 @@
-<html>  
-<head>  
-	<title> Pagination in PHP </title>  
-</head>  
+<!-- TP 1 PAGINATION - ANDREW OSHEI -->
+<!-- Langages Web - Master 1 Informatique-->
+<html>
+<!-- Définir des styles pour les éléments html utilisés dans la page -->
 <style>
-a {
-	font-size: 32;
-}
-td {
-	border: 1px solid #333;
-	padding: 5px;
-}
-th {
-	padding: 5px;
-}
-thead,
-tfoot {
-	background-color: #333;
-	color: #fff;
-}
+	a {
+		font-size: 32;
+		margin-left: 5px;
+		margin-right: 5px;
+	}
+	td {
+		border: 1px solid #333;
+		padding: 5px;
+	}
+	th {
+		padding: 5px;
+	}
+	thead,
+	tfoot {
+		background-color: #333;
+		color: #fff;
+	}
+	h2 {
+		text-align: center;
+		width: 50%;
+	}
+	.table-div {
+		text-align: center;
+		width:50%;
+		margin: 10px;
+	}
 </style>
 <body>
+	<!-- Démarrer le code PHP -->
 	<?php
-		// MySQL host, username, pword
-		$conn = mysqli_connect('localhost', 'andrew', 'lets give it another go');  
+		// Connecter à MySQL
+		// 'localhost' en tant qu'utilisateur 'andrew' avec le mot de passe ...
+		$conn = mysqli_connect('localhost', 'andrew', 'lets give it another go');
 
-		if (! $conn) {  
-		         die("Connection failed" . mysqli_connect_error());  
-		}  
-		else {  
-		         // connect to the database named Pagination
-		         mysqli_select_db($conn, 'pagination_mock');  
-		}  
+		// Si la connexion à MySQL échoue
+		if (! $conn) {
+			// afficher le message d'échec
+			die("La connexion à la base de données a échoué" . mysqli_connect_error());
+		}
+		// Si la connexion à MySQL est réussie
+		else {
+		         // Sélectionner la base de données avec les données de notre page
+		         mysqli_select_db($conn, 'pagination_mock');
+		}
 
-		// variable to store number of rows per page
-		$limit = 10; 
+		// Définir la limite du nombre de lignes affichées par page
+		$row_limit = 10;
 
-		// query to retrieve all rows from the table Countries
-		$getQuery = "SELECT * FROM page_mock";    
+		// Créer une requête pour récupérer toutes les lignes de la table 'page_mock'
+		$get_data = "SELECT * FROM page_mock";
 
-		// get the result
-		$result = mysqli_query($conn, $getQuery);  
-		$total_rows = mysqli_num_rows($result);    
+		// Envoyer la requête à la base de données et récupérer les données
+		$result = mysqli_query($conn, $get_data);
+		
+		// Obtenir le nombre de lignes reçues
+		$total_rows = mysqli_num_rows($result);
 
-		// get the required number of pages
-		$total_pages = ceil ($total_rows / $limit);    
+		// Calculer le nombre de pages nécessaires pour afficher les données
+		$total_pages = ceil ($total_rows / $row_limit);
 
-		// update the active page number
-		if (!isset ($_GET['page']) ) {  
-		    $page_number = 1;  
-		} else {  
-		    $page_number = $_GET['page'];  
+		// Si la variable 'page' n'est pas définie par Http
+		if (!isset ($_GET['page']) ) {
+			// selectionner la première page
+			$page_number = 1;
+		// Si la variable 'page' est définie par Http
+		} else {
+			// Définisser la page actuelle sur le numéro reçu
+		    $page_number = $_GET['page'];
 		}    
 
-		// get the initial page number
-		$initial_page = ($page_number-1) * $limit;   
+		// Calculer le décalage de ligne pour la page actuelle
+		$page_offset = ($page_number-1) * $row_limit;   
 
-		// get data of selected rows per page    
-		$getQuery = "SELECT * FROM page_mock LIMIT " . $initial_page . ',' . $limit;  
-		$result = mysqli_query($conn, $getQuery);       
+		// Créer une requête pour obtenir des données pour la page actuelle
+		$get_data = "SELECT * FROM page_mock LIMIT " . $page_offset . ',' . $row_limit;
+		
+		// Envoyer la requête et recevoir les données
+		$result = mysqli_query($conn, $get_data);
 
+		// Afficher le titre de la page
+		echo '<h2>Base de données de livres</h2>';
 
-		$counter = (($page_number - 1) * 10) + 1;
-		$current = $page_number;
-
-		echo '<h2 style="text-align: center; width: 50%;">Base de données de livres</h2>';
-
-		echo '<div style="text-align: center; width:50%; margin: 10px;">';
+		// Créer un tableau html pour afficher les données
+		echo '<div class="table-div">';
 		echo '<table style="width: 100%;"><thead><tr>';
-		echo '<th colspan="4">Page ' . $current . '</th>';
+		
+		// Définir les en-têtes du tableau
+		echo '<th colspan="4">Page ' . $page_number . '</th>';
 		echo '</tr><tr>';
+		
+		// Définir les étiquettes des colonnes du tableau
 		echo '<th colspan="1">Idx</th>';
 		echo '<th colspan="1">Code</th>';
 		echo '<th colspan="1">Titre</th>';
 		echo '<th colspan="1">Auteur</th>';
 		echo '</tr></thead><tbody>';
-		//display the retrieved result on the webpage  
+		
+		// Incrémenter 'offset' pour afficher l'index de ligne
+		$page_offset = $page_offset + 1;
+		
+		// Pour toutes les lignes reçues de la base de données
 		while ($row = mysqli_fetch_array($result)) {
+			// Ajouter une ligne de données au tableau
 			echo '<tr>';
-		    echo '<td>' . $counter . '</td>';
+		    echo '<td>' . $page_offset . '</td>';
 		    echo '<td>' . $row['cote'] . '</td>';
 		    echo '<td>' . $row['titre'] . '</td>';
 		    echo '<td>' . $row['auteur'] . '</td>';
 		    echo '</tr>';
-		    $counter = $counter + 1;
+		    
+		    // Incrémenter 'offset' pour les indices de ligne
+		    $page_offset = $page_offset + 1;
 		}
+		
+		// Fermer le tableau
 		echo '</tbody></table></div>';
 
+		// Élément div de début pour la pagination
 		echo '<div style="text-align: center; width:50%;">';
-		
-		// If current page greater than 1 add back button
-		if ($current > 1) {
-			echo '<a style="margin-left: 5px; margin-right: 5px;" href = "index.php?page=' . ($current - 1) . '"><</a>';
+
+		// Si la page actuelle est supérieure à 1
+		if ($page_number > 1) {
+			// Activer le bouton de retour de page
+			echo '<a href = "index.php?page=' . ($page_number - 1) . '"><</a>';
 		}
+		// Sinon
 		else {
-			echo '<a style="margin-left: 5px; margin-right: 5px;"><</a>';
+			// Desactiver le bouton de retour de page
+			echo '<a><</a>';
 		}
 		
-		for($page_number = 1; $page_number<= $total_pages; $page_number++) {  
-		    echo '<a href = "index.php?page=' . $page_number . '">' . $page_number . ' </a>';  
+		// Pour le nombre total de pages
+		for($counter = 1; $counter<= $total_pages; $counter++) {
+			// Ajouter un bouton pour chaque page
+		    echo '<a href = "index.php?page=' . $counter . '">' . $counter . ' </a>';
 		}
 		
-		// If current page is not last page add forward button
-		if ($current != $total_pages) {
-			echo '<a style="margin-left: 5px; margin-right: 5px;" href = "index.php?page=' . ($current + 1) . '">></a>';
+		// Si la page actuelle n'est pas la dernière page
+		if ($page_number != $total_pages) {
+			// Activer le bouton de page suivante
+			echo '<a href = "index.php?page=' . ($page_number + 1) . '">></a>';
 		}
+		// Sinon
 		else {
-			echo '<a style="margin-left: 5px; margin-right: 5px;">></a>';
+			// Desactiver le bouton de page suivante
+			echo '<a>></a>';
 		}
+		// Fermer l'élément div de pagination
 		echo '</div>';
 	?>
 	</div>
-
-</body>  
-</html> 
+</body>
+</html>
