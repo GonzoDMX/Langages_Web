@@ -81,78 +81,77 @@
 		
 		// Envoyer la requête et recevoir les données
 		$result = mysqli_query($conn, $get_data);
-
-		// Afficher le titre de la page
-		echo '<h2>Base de données de livres</h2>';
-
-		// Créer un tableau html pour afficher les données
-		echo '<div class="table-div">';
-		echo '<table style="width: 100%;"><thead><tr>';
-		
-		// Définir les en-têtes du tableau
-		echo '<th colspan="4">Page ' . $page_number . '</th>';
-		echo '</tr><tr>';
-		
-		// Définir les étiquettes des colonnes du tableau
-		echo '<th colspan="1">Idx</th>';
-		echo '<th colspan="1">Code</th>';
-		echo '<th colspan="1">Titre</th>';
-		echo '<th colspan="1">Auteur</th>';
-		echo '</tr></thead><tbody>';
-		
-		// Incrémenter 'offset' pour afficher l'index de ligne
-		$page_offset = $page_offset + 1;
-		
-		// Pour toutes les lignes reçues de la base de données
-		while ($row = mysqli_fetch_array($result)) {
-			// Ajouter une ligne de données au tableau
-			echo '<tr>';
-		    echo '<td>' . $page_offset . '</td>';
-		    echo '<td>' . $row['cote'] . '</td>';
-		    echo '<td>' . $row['titre'] . '</td>';
-		    echo '<td>' . $row['auteur'] . '</td>';
-		    echo '</tr>';
-		    
-		    // Incrémenter 'offset' pour les indices de ligne
-		    $page_offset = $page_offset + 1;
-		}
-		
-		// Fermer le tableau
-		echo '</tbody></table></div>';
-
-		// Élément div de début pour la pagination
-		echo '<div style="text-align: center; width:50%;">';
-
-		// Si la page actuelle est supérieure à 1
-		if ($page_number > 1) {
-			// Activer le bouton de retour de page
-			echo '<a href = "index.php?page=' . ($page_number - 1) . '"><</a>';
-		}
-		// Sinon
-		else {
-			// Desactiver le bouton de retour de page
-			echo '<a><</a>';
-		}
-		
-		// Pour le nombre total de pages
-		for($counter = 1; $counter<= $total_pages; $counter++) {
-			// Ajouter un bouton pour chaque page
-		    echo '<a href = "index.php?page=' . $counter . '">' . $counter . ' </a>';
-		}
-		
-		// Si la page actuelle n'est pas la dernière page
-		if ($page_number != $total_pages) {
-			// Activer le bouton de page suivante
-			echo '<a href = "index.php?page=' . ($page_number + 1) . '">></a>';
-		}
-		// Sinon
-		else {
-			// Desactiver le bouton de page suivante
-			echo '<a>></a>';
-		}
-		// Fermer l'élément div de pagination
-		echo '</div>';
 	?>
+	<h2>Base de données de livres</h2>
+		<div class="table-div">
+			<table style="width: 100%;">
+				<thead>
+					<tr>
+					<?php
+						// Définir les en-têtes du tableau
+						echo '<th colspan="4">Page ' . $page_number . '</th>';
+					?>
+					</tr>
+					<tr>
+						<th colspan="1">Idx</th>
+						<th colspan="1">Code</th>
+						<th colspan="1">Titre</th>
+						<th colspan="1">Auteur</th>
+					</tr>
+				</thead>
+				<tbody>
+				<?php
+					// Incrémenter 'offset' pour afficher l'index de ligne
+					$page_offset = $page_offset + 1;
+					
+					// Pour toutes les lignes reçues de la base de données
+					while ($row = mysqli_fetch_array($result)) {
+						// Ajouter une ligne de données au tableau
+						echo '<tr>';
+						echo '<td>' . $page_offset . '</td>';
+						echo '<td>' . $row['cote'] . '</td>';
+						echo '<td>' . $row['titre'] . '</td>';
+						echo '<td>' . $row['auteur'] . '</td>';
+						echo '</tr>';
+						
+						// Incrémenter 'offset' pour les indices de ligne
+						$page_offset = $page_offset + 1;
+					}
+				?>
+				</tbody>
+			</table>
+		</div>
+		<div style="text-align: center; width:50%;">
+		<?php
+			// Si la page actuelle est supérieure à 1
+			if ($page_number > 1) {
+				// Activer le bouton de retour de page
+				echo '<a href = "index.php?page=' . ($page_number - 1) . '"><</a>';
+			}
+			// Sinon
+			else {
+				// Desactiver le bouton de retour de page
+				echo '<a><</a>';
+			}
+			
+			// Pour le nombre total de pages
+			for($counter = 1; $counter<= $total_pages; $counter++) {
+				// Ajouter un bouton pour chaque page
+				echo '<a href = "index.php?page=' . $counter . '">' . $counter . ' </a>';
+			}
+			
+			// Si la page actuelle n'est pas la dernière page
+			if ($page_number != $total_pages) {
+				// Activer le bouton de page suivante
+				echo '<a href = "index.php?page=' . ($page_number + 1) . '">></a>';
+			}
+			// Sinon
+			else {
+				// Desactiver le bouton de page suivante
+				echo '<a>></a>';
+			}
+		?>
+		</div>
 	</div>
 </body>
 </html>
