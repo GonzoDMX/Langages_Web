@@ -34,8 +34,8 @@
 	<!-- Démarrer le code PHP -->
 	<?php
 		// Connecter à MySQL
-		// 'localhost' en tant qu'utilisateur 'andrew' avec le mot de passe ...
-		$conn = mysqli_connect('localhost', 'andrew', 'lets give it another go');
+		// 'localhost' en tant qu'utilisateur 'user' avec le mot de passe ...
+		$conn = mysqli_connect('localhost', 'user', 'pasword123');
 
 		// Si la connexion à MySQL échoue
 		if (! $conn) {
