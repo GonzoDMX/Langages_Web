@@ -4,7 +4,7 @@ USE my_images;
 
 CREATE TABLE images
 (
-	id INT NOT NULL KEY,
+	id INT NOT NULL PRIMARY KEY,
   	name varchar(120),
   	type varchar(6),
   	size INT,

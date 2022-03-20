@@ -164,7 +164,7 @@
 					// Si la page actuelle est supérieure à 1
 					if ($page_number > 1) {
 						// Activer le bouton de retour de page
-						echo '<a href = "tele_form.php?page=' . ($page_number - 1) . '"><</a>';
+						echo '<a href = "index.php?page=' . ($page_number - 1) . '"><</a>';
 					}
 					// Sinon
 					else {
@@ -174,12 +174,12 @@
 					// Pour le nombre total de pages
 					for($counter = 1; $counter<= $total_pages; $counter++) {
 						// Ajouter un bouton pour chaque page
-						echo '<a href = "tele_form.php?page=' . $counter . '">' . $counter . '</a>';
+						echo '<a href = "index.php?page=' . $counter . '">' . $counter . '</a>';
 					}
 					// Si la page actuelle n'est pas la dernière page
 					if ($page_number != $total_pages) {
 						// Activer le bouton de page suivante
-						echo '<a href = "tele_form.php?page=' . ($page_number + 1) . '">></a>';
+						echo '<a href = "index.php?page=' . ($page_number + 1) . '">></a>';
 					}
 					// Sinon
 					else {
