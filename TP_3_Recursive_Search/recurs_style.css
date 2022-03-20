@@ -1,0 +1,80 @@
+body {
+	height: 90vh;
+}
+ul {
+	list-style-type: none;
+}
+.directr {
+	cursor: pointer;
+	font-weight: bold;
+}
+
+.directr::before {
+	content: "\1F4C1";
+	margin-right: 8px;
+}
+.caret-down::down {
+	content: "\1F4C2";
+}
+.filels::before {
+	content: "\1F4C4";
+	margin-right: 8px;
+}
+.img-file::before {
+	content: "\1F4F7";
+	margin-right: 8px;
+}
+table {
+	margin-left: auto;
+	margin-right: auto;
+}
+tr td {
+	border: 1px solid black;
+	padding: 5px;
+}
+a {
+	font-size: 32;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+img {
+    object-fit: cover;
+	width: 250px;
+	height: 250px;
+}
+ul li a:hover img {
+	object-fit: scale-down;
+	transform: scale(2);
+}
+.file-tree {
+	float: left;
+	width: 30%;
+	height: 100%;
+	padding-left: 5%;
+	text-align: center;
+}
+.scroll-tree {
+	overflow: auto;
+	height: 80%;
+	border: 5px solid black;
+	text-align: left;
+}
+.img-gallery {
+	float: right;
+	width: 60%;
+	height: 100%;
+	text-align: center;
+}
+.fLabel {
+	width: 30%;
+	margin-top: 5px;
+}
+.tInput {
+	width: 70%;
+	margin-top: 5px;
+}
+#submit-btn {
+	margin-top: 5px;
+	width: 100px;
+	height: 30px;
+}
