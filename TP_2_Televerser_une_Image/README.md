@@ -8,7 +8,11 @@ Lorsqu'une image est télécversée, à l'aide des boutons en haut de la page, l
   <img src="https://github.com/GonzoDMX/Langages_Web/blob/main/TP_2_Televerser_une_Image/assets/page_overview.png">
 </p>
 
-### Survoler l'image
+## Pagination
+
+Lorsque plus de 8 images ont été téléchargées sur le serveur, des pages de galerie d'images supplémentaires sont mises à disposition pour visualisation. Ils sont rendus accessibles par les liens du bouton de pagination affichés sous la galerie d'images.
+
+## Survoler l'image
 
 L'application dispose également d'une fonction de zoom automatique lorsque la souris survole une image. Cela restaure également l'image à son rapport d'aspect d'origine.
 
