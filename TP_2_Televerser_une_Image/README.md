@@ -4,10 +4,15 @@ Il s'agit d'un projet démontrant le téléversement d'une image. Écrit en PHP,
 
 Lorsqu'une image est télécversée, à l'aide des boutons en haut de la page, la galerie de visualisation d'images est immédiatement mise à jour. Les images sont affichées de la plus récente (en haut à gauche) à la plus ancienne (en bas à droite). Les données d'image (nom, type, taille et date de téléchargement) sont affichées sous chaque image.
 
-![](assets/page_overview.png)
-
 <p align="center">
   <img src="https://github.com/GonzoDMX/Langages_Web/blob/main/TP_2_Televerser_une_Image/assets/page_overview.png">
 </p>
 
-![](assets/hover_demo.png)
+### Survoler l'image
+
+L'application dispose également d'une fonction de zoom automatique lorsque la souris survole une image. Cela restaure également l'image à son rapport d'aspect d'origine.
+
+<p align="center">
+  <img src="https://github.com/GonzoDMX/Langages_Web/blob/main/TP_2_Televerser_une_Image/assets/hover_demo.png">
+</p>
+
