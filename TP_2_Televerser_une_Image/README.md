@@ -6,4 +6,8 @@ Lorsqu'une image est télécversée, à l'aide des boutons en haut de la page, l
 
 ![](assets/page_overview.png)
 
+<p align="center">
+  <img src="https://github.com/GonzoDMX/Langages_Web/blob/main/TP_2_Televerser_une_Image/assets/page_overview.png">
+</p>
+
 ![](assets/hover_demo.png)
