@@ -13,15 +13,13 @@ if(!$conn) {
 	die("Cannot connect to MySQL DB: " . mysqli_connect_error());
 } else {
 	mysqli_select_db($conn, 'file_tree_db');
-	mysqli_query($conn, "DELETE FROM directories" );
-	mysqli_query($conn, "DELETE FROM files" );
 }
 
 // Définir le nombre de secondes pendant lesquelles le script est
 // autorisé à s'exécuter, Dans ce cas 500 secondes.
 set_time_limit (500);
 
-$path = "";
+$path = "docs";
 if(isset($_POST['rootDir'])) {
 	$path = $_POST['rootDir'];
 	$_SESSION['rootDir'] = $path;
@@ -37,14 +35,26 @@ if(isset($_POST['myFilter'])) {
 } elseif (isset($_SESSION['myFilter'])) {
 	$filter = $_SESSION['myFilter'];
 }
-#$path = "/home/andrew/Documents/CrazyHorse_Documents";
 
-// Envoyer le chemin du répertoire, défini dans la variable $path,
-// comme argument à la fonction exploreDir().
-explorerDir($path, $conn, $filter, TRUE);
+if(isset($_POST['trigSearch'])) {
+	$_SESSION['search'] = $_POST['trigSearch'];
+}
 
-function explorerDir($path, $conn, $filter, $first)
-{
+if(!isset($_SESSION['search'])) {
+	$_SESSION['search'] === "TRUE";
+}
+
+if($_SESSION['search'] === "TRUE") {
+	mysqli_query($conn, "DELETE FROM directories" );
+	mysqli_query($conn, "DELETE FROM files" );
+	
+	// Envoyer le chemin du répertoire, défini dans la variable $path,
+	// comme argument à la fonction exploreDir().
+	explorerDir($path, $conn, $filter, TRUE);
+	$_SESSION['search'] = "FALSE";
+}
+
+function explorerDir($path, $conn, $filter, $first) {
 	// Créer un handle pour le répertoire $path
 	// Cela permet les commandes:
 	// 		closedir() - fermer le handle
@@ -126,6 +136,7 @@ function explorerDir($path, $conn, $filter, $first)
 		<label class="fLabel" for="rootDir">Search directory :</label>
 		<input class="tInput" type="text" id="rootDir" name="rootDir" value=<?php echo $path; ?>><br>
 		<label class="fLabel" for="myFilter">Filter search by :</label>
+		<input type="hidden" id="trigSearch" name="trigSearch" value="TRUE">
 		<input class="tInput" type="text" id="myFilter" name="myFilter" value=<?php echo $filter; ?>><br>
 		<input id="submit-btn" type="submit" value="Submit">
 	</form>
@@ -162,23 +173,39 @@ function explorerDir($path, $conn, $filter, $first)
 <h1>Image Gallery</h1>
 <h2>A collection of the images found in file tree</h2>
 <?php
+	// Test if image is available in rel path
+	function test_locale($path) {
+		$tmp = realpath($path);
+		$tmp = explode("/", $tmp);
+		if ($tmp[0] === "var" && $tmp[1] === "www" && $tmp[2] === "html") {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	}
+
 	// GET IMAGES FROM ABSOLUTE PATH
 	function get_my_image($path, $type) {
 		if ($type === "jpg" || $type === "jpeg") {
-		   $im = imagecreatefromjpeg($path);
+			$im = imagecreatefromjpeg($path);
 			ob_start();
 			imagejpeg($im);
 			$imgData=ob_get_clean();
 			imagedestroy($im);
-			echo '<img src="data:image/jpeg;base64,'.base64_encode($imgData).'">';
+			echo '<img src="data:image/jpeg;base64,'.base64_encode($imgData).'"/>';
 		} 
-		elseif ($type === "png") {		
-		   $im = imagecreatefrompng($path);
-			ob_start();
-			imagepng($im);
-			$imgData=ob_get_clean();
-			imagedestroy($im);
-			echo '<img src="data:image/png;base64,'.base64_encode($imgData).'">';
+		elseif ($type === "png") {
+			// HAndel Local png images
+			if(strpos(realpath($path), "/var/www/html") !== FALSE) {
+				echo '<img src="/'. $path . '">';
+			} else {
+				$im = imagecreatefrompng($path);
+				ob_start();
+				imagepng($im);
+				$imgData=ob_get_clean();
+				imagedestroy($im);
+				echo '<img src="data:/image/png;base64,'.base64_encode($imgData).'"/>';
+			}
 		}
 	}
 
@@ -198,7 +225,7 @@ function explorerDir($path, $conn, $filter, $first)
 	$result = mysqli_query($conn, $lim_img);
 	if ($num_rows > 0) {
 		// POPULATE TABLE WITH IMAGES
-		echo '<table>';
+		echo '<table width="300" cellspacing="0" cellpadding="0">';
 		$COUNTER = 1;
 		while ($row = mysqli_fetch_array($result)) {
 			if ($COUNTER == 1) {
