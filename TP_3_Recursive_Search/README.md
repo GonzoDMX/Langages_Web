@@ -2,6 +2,12 @@
 
 Ce projet présente certains éléments des deux projets précédents tout en ajoutant une fonction de recherche récursive qui permet de cartographier les arborescences de répertoires et de filtrer les résultats par une sous-chaîne définie par l'utilisateur. Après avoir cartographié une arborescence de répertoires définie par l'utilisateur, le programme affiche toutes les images trouvées (type jpg et png uniquement) dans la galerie d'images adjacente.
 
+Fichiers inclus :
+- `index_r.php` -- Ceci est le programme principal, exécutez-le depuis votre navigateur Web pour tester l'application.
+- `recurs_style.css` -- Ceci est le CSS Stylesheet utilisée par `index_r.php`.
+- `file_tree.sql` -- Le script SQL pour construire le schéma de base de données utilisé pour cette application.
+- `TP_3_Comments.php` -- Ceci est juste la fonction récursive d'origine avec des commentaires ajoutés pour expliquer sa fonctionnalité.
+
 Le programme fonctionne en lançant un parcours récursif d'un répertoire, défini dans le champ "Search directory". Tous les fichiers et sous-répertoires trouvés sont enregistrés dans une base de données MySQL. Après avoir terminé la fonction récursive, le programme lance une deuxième fonction récursive en utilisant les données de la base de données MySQL pour reconstruire la structure du répertoire sous forme de liste HTML. Toutes les images jpg et png trouvées dans le répertoire ciblé seront alors affichées dans la galerie d'images.
 
 <p align="center">
