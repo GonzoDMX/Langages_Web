@@ -1,9 +1,16 @@
 # Parcours récursif des arborescences de répertoires
 
+Ce projet présente certains éléments des deux projets précédents tout en ajoutant une fonction de recherche récursive qui permet de cartographier les arborescences de répertoires et de filtrer les résultats par une sous-chaîne définie par l'utilisateur. Après avoir cartographié une arborescence de répertoires définie par l'utilisateur, le programme affiche toutes les images trouvées (type jpg et png uniquement) dans la galerie d'images adjacente.
+
+Le programme fonctionne en lançant un parcours récursif d'un répertoire, défini dans le champ "Search directory". Tous les fichiers et sous-répertoires trouvés sont enregistrés dans une base de données MySQL. Après avoir terminé la fonction récursive, le programme lance une deuxième fonction récursive en utilisant les données de la base de données MySQL pour reconstruire la structure du répertoire sous forme de liste HTML. Toutes les images jpg et png trouvées dans le répertoire ciblé seront alors affichées dans la galerie d'images.
+
 <p align="center">
   <img src="https://github.com/GonzoDMX/Langages_Web/blob/main/TP_3_Recursive_Search/assets/app_overview.png">
 </p>
 
+## Search Directory
+
+Le programme est capable de rechercher n'importe quel répertoire accessible par l'utilisateur sur le serveur.
 
 <p align="center">
   <img src="https://github.com/GonzoDMX/Langages_Web/blob/main/TP_3_Recursive_Search/assets/other_dirs.png">
@@ -11,7 +18,7 @@
 
 ## Filtrer les résultats de la recherche
 
-En saisissant une chaîne de caractères dans le champ "Filter search by" avant de lancer une recherche. Les résultats de la recherche seront limités aux seuls fichiers contenant la chaîne de caractères saisie. Cela peut également être utile pour afficher des types d'images spécifiques. En effet, seuls les fichiers trouvés dans le résultat final de la recherche seront affichés. Ainsi, si, par exemple, nous saisissons 'png' dans le champ de filtre, la recherche ne renverra que des fichiers png (ou d'autres fichiers contenant les caractères 'p', 'n' et 'g' dans cet ordre).
+En saisissant une chaîne de caractères dans le champ "Filter search by" avant de lancer une recherche. Les résultats de la recherche seront limités aux seuls fichiers contenant la chaîne de caractères saisie. Cela peut également être utile pour afficher des types d'images spécifiques. En effet, seuls les fichiers trouvés dans le résultat final de la recherche seront affichés. Ainsi, si, par exemple, nous saisissons 'png' dans le champ de filtre, la recherche ne renverra que des fichiers png (ou d'autres fichiers avec un nom contenant les caractères 'p', 'n' et 'g' dans cet ordre).
 
 Noter que la recherche récursive passera toujours sur chaque fichier de l'arborescence de répertoires ciblée. Les résultats de la recherche sont filtrés avant l'archivage dans la base de données MySQL.
 
