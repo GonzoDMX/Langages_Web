@@ -5,17 +5,17 @@ USE file_tree_db;
 CREATE TABLE directories
 (
 	id INT AUTO_INCREMENT PRIMARY KEY,
-	name varchar(64),
-	parent varchar(64),
+	name varchar(128),
+	parent varchar(128),
 	path varchar(255)
 );
 
 CREATE TABLE files
 (
 	id INT AUTO_INCREMENT PRIMARY KEY,
-	name varchar(120),
-	parent varchar(64),
-	type varchar(6),
+	name varchar(128),
+	parent varchar(128),
+	type varchar(12),
 	size INT,
 	path varchar(255)
 );
