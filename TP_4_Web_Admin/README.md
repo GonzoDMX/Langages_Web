@@ -56,7 +56,7 @@ L'arborescence des répertoires a été améliorée par rapport à l'application
   <img style="width: 50%; height: 50%; text-align: center;" src="https://github.com/GonzoDMX/Langages_Web/blob/main/TP_4_Web_Admin/assets/source_tree.png">
 </p>
 
-### Image deletion
+### Suppression d'images
 
 Vous avez peut-être déjà remarqué que les images affichées sur la page d'administration comportent un bouton supplémentaire, "Remove". Cela permet à l'administrateur de supprimer sélectivement des images de la base de données. Une image supprimée ne sera plus visible pour les utilisateurs.
 
