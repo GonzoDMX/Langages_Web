@@ -1,0 +1,132 @@
+html body {
+	height: 90vh;
+	font-family: 'Courier New', monospace;
+}
+.admin-div {
+	text-align: center;
+}
+.tree-nav {
+	float: left;
+	width: 40%;
+	height: 100%;
+	padding-left: 3%;
+	text-align: center;
+	margin-top: 0;
+}
+.fLabel {
+	width: 30%;
+	margin-top: 5px;
+	float: left;
+}
+.tInput {
+	width: 70%;
+	margin-top: 5px;
+}
+#submit-btn {
+	margin-top: 5px;
+	width: 100px;
+	height: 30px;
+}
+.tree-view {
+	overflow: auto;
+	height: 80%;
+	width: 100%;
+	border: 5px solid black;
+	text-align: left;
+	white-space: nowrap;
+}
+.tree-list {
+	list-style: none;
+}
+.sub-menu {
+	list-style: none;
+	position: relative;
+	margin-top: 10px;
+	margin-left: -10px;
+}
+.item span {
+	position: relative;
+}
+.sub-menu .item span::before {
+	content: '';
+	height: var(--my-height);
+	width: 10px;
+	border-bottom: 2px solid #000;
+	border-left: 2px solid #000;
+	position: absolute;
+	bottom: 10px;
+	left: -10px;
+	z-index: -1;
+}
+.dir-icon::before {
+	content: "\1F4C1";
+	font-size: 30px;
+}
+.image-icon::before {
+	content: "\1F4F7";
+	font-size: 25px;
+}
+.file-icon::before {
+	content: "\1F4C4";
+	font-size: 25px;
+}
+.img-gallery {
+	float: right;
+	width: 50%;
+	height: 80%;
+	text-align: center;
+	padding-right: 3%;
+	margin-top: 2%;
+}
+.usr-img-gallery {
+	height: 80%;
+	text-align: center;
+	margin-top: 0;
+	table-layout: fixed ;
+	max-width: 80%;
+	margin-left: 10%;
+}
+.img-table {
+	margin-left: auto;
+	margin-right: auto;
+	border: 2px solid black;
+	text-align: center;
+	table-layout: fixed ;
+}
+.img-col {
+	width: 25%;
+}
+.img-row .img-col {
+	border: 2px solid black;
+	padding: 5px;
+}
+.img-img {
+	object-fit: cover;
+	width: 200px;
+	height: 200px;
+}
+.img-span .img-zoom:hover .img-img {
+	object-fit: scale-down;
+	transform: scale(2);
+}
+.img-label {
+	text-align: left;
+	padding-left: 3%;
+	padding-right: 3%;
+}
+.page-num {
+	font-size: 32;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+a.button {
+	border: 1px solid black;
+	padding: 2px;
+	padding-left: 4px;
+	padding-right: 4px;
+	-webkit-appearance: button;
+    -moz-appearance: button;
+	appearance: button;
+	text-decoration: none;
+	color: initial;
+}
