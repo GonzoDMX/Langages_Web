@@ -63,3 +63,22 @@ Vous avez peut-être déjà remarqué que les images affichées sur la page d'ad
 <p align="center">
   <img src="https://github.com/GonzoDMX/Langages_Web/blob/main/TP_4_Web_Admin/assets/remove_image.png">
 </p>
+
+## La page utilisateur - Galerie d'images
+
+La page utilisateur (galerie d'images) reprend tous les éléments développés dans les projets précédents. Cela inclut le téléchargement d'une image, le zoom sur l'image au survol de la souris et les contrôles de pagination au bas de la page.
+
+<p align="center">
+  <img src="https://github.com/GonzoDMX/Langages_Web/blob/main/TP_4_Web_Admin/assets/user_gallery.png">
+</p>
+
+### Ajouts de pages utilisateur
+
+Si vous avez pris le temps de tester le projet précédent, vous remarquerez peut-être l'ajout de deux éléments de sélection déroulants. La sélection déroulante située à côté des commandes de téléchargement de fichiers permet la classification des images de la galerie. Les catégories disponibles sont définies par les noms de répertoire situés dans le répertoire racine des images. En bas de la page, au-dessus des contrôles de pagination, la deuxième popup bascule la visibilité des images. Sélectionnez une catégorie et vous ne verrez que les images de cette catégorie. 
+
+<p align="center">
+  <img src="https://github.com/GonzoDMX/Langages_Web/blob/main/TP_4_Web_Admin/assets/category_select.png">
+</p>
+
+
+
