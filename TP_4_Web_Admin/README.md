@@ -53,7 +53,7 @@ Avec tout configuré, redémarrez Apache et maintenant, lorsque vous accédez à
 L'arborescence des répertoires a été améliorée par rapport à l'application précédente. Il trace maintenant une ligne de connexion entre les répertoires et les fichiers pour illustrer plus clairement la disposition de l'arborescence des répertoires. La saisie d'un répertoire n'effectue plus une recherche mais constitue plutôt le mécanisme de définition du répertoire racine de la galerie d'images. Le filtre a le même objectif. C'est-à-dire que les résultats de la recherche dans le répertoire définiront le contenu de l'image visible pour les utilisateurs de la galerie d'images accessible au public.
 
 <p align="center">
-  <img src="https://github.com/GonzoDMX/Langages_Web/blob/main/TP_4_Web_Admin/assets/source_tree.png">
+  <img style="width: 50%; height:50%; text-align: center;" src="https://github.com/GonzoDMX/Langages_Web/blob/main/TP_4_Web_Admin/assets/source_tree.png">
 </p>
 
 ### Image deletion
