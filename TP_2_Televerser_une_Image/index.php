@@ -70,7 +70,7 @@
 	<h1>PHP Image Viewer</h1>
 	<div>
 		<h2>Upload Image File</h2>
-		<form class="myForm" action="tele_form.php" method="POST" enctype="multipart/form-data">
+		<form class="myForm" action="index.php" method="POST" enctype="multipart/form-data">
 			<input type="file" name="myFile" value="Choose File">
 			<input type="submit" value="Upload">
 		</form>
@@ -114,7 +114,7 @@
 								} else {
 									echo "Upload failed, unable to connect to database.";
 								}
-								header("Location:tele_form.php");
+								header("Location:index.php");
 							} else {
 						  		echo "Upload failed, there was an error uploading your file.";
 						  	}
